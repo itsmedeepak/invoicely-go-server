@@ -80,6 +80,13 @@ func SignUp() gin.HandlerFunc {
 			return
 		}
 
+		_, mailErr := utils.SendWelcomeEmail(user.FirstName+" "+user.LastName, user.Email)
+
+		if mailErr != nil {
+			utils.ApiResponse(c, http.StatusInternalServerError, false, "failed to send welcome email", mailErr)
+			return
+		}
+
 		responseUser := map[string]interface{}{
 			"_id":           user.UserId,
 			"first_name":    user.FirstName,
@@ -174,16 +181,5 @@ func ResetPassword() gin.HandlerFunc {
 func SendOtpEmail() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-	}
-}
-
-func SendHelloController() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		email := "deep.bes.us@gmail.com"
-		result, err := utils.SendHelloEmail(email)
-		if err != nil {
-			utils.ApiResponse(c, 500, false, "Error", err)
-		}
-		utils.ApiResponse(c, 200, true, "Message Send Success", result)
 	}
 }

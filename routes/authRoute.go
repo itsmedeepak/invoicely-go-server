@@ -13,5 +13,5 @@ func AuthRoute(incomingRoute *gin.Engine) {
 	incomingRoute.POST("/auth/sign-in", controllers.LogIn())
 	incomingRoute.POST("/auth/forgot-password", controllers.ResetPassword())
 	incomingRoute.POST("/auth/send-otp", controllers.SendOtpEmail())
-	incomingRoute.POST("/auth/test", controllers.SendHelloController())
+	// incomingRoute.POST("/auth/test", controllers.SendHelloController())
 }
