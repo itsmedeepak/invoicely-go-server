@@ -27,12 +27,8 @@ func LoadEmailTemplate(templatePath string, invoice models.Invoice, company mode
 
 	log.Println("4")
 
-	funcMap := template.FuncMap{
-		"formatDate": formatDate, // Attach function to template
-	}
-
 	// Parse the email template file
-	tmpl, err := template.New("invoice").Funcs(funcMap).ParseFiles(templatePath)
+	tmpl, err := template.New("invoice").ParseFiles(templatePath)
 	if err != nil {
 		log.Println(err, templatePath)
 		return "", fmt.Errorf("failed to load template from %s: %w", templatePath, err)
@@ -93,9 +89,6 @@ func SendHelloEmail(email string) (*sesv2.SendEmailOutput, error) {
 
 	log.Println("Hello email sent successfully")
 	return result, nil
-}
-func formatDate(t time.Time) string {
-	return t.Format("02 Jan 2006") // Example: "26 Mar 2025"
 }
 
 // SendInvoiceEmail sends an invoice email to the customer

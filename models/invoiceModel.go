@@ -23,8 +23,8 @@ type Invoice struct {
 	InvoiceNo          string             `json:"invoice_no" bson:"invoice_no"`
 	InvoiceUrl         string             `json:"invoice_url" bson:"invoice_url"`
 	InvoiceLogo        string             `json:"invoice_logo" bson:"invoice_logo"`
-	IssuedDate         time.Time          `json:"issued_date" bson:"issued_date"`
-	DueDate            time.Time          `json:"due_date" bson:"due_date"`
+	IssuedDate         string             `json:"issued_date" bson:"issued_date"`
+	DueDate            string             `json:"due_date" bson:"due_date"`
 	Customer           Customer           `json:"customer" bson:"customer"`
 	CustomerID         string             `json:"customer_id" bson:"customer_id"`
 	Products           []ProductInInvoice `json:"products" bson:"products"`

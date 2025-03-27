@@ -24,8 +24,8 @@
         
         <div style="margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; color: #374151;">
             <p><strong>Invoice #: </strong> {{ .Invoice.InvoiceID }}</p>
-            <p><strong>Issued:</strong> {{ .Invoice.IssuedDate | formatDate }}</p>
-            <p><strong>Due:</strong> {{ .Invoice.DueDate | formatDate }}</p>
+            <p><strong>Issued:</strong> {{ .Invoice.IssuedDate }}</p>
+            <p><strong>Due:</strong> {{ .Invoice.DueDate }}</p>
         </div>
         
         <div style="margin-bottom: 20px;">
