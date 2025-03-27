@@ -9,6 +9,7 @@ type User struct {
 	FirstName    string    `json:"first_name" bson:"first_name" validate:"required,min=2,max=20"`
 	LastName     string    `json:"last_name" bson:"last_name" validate:"required,min=2,max=20"`
 	Email        string    `json:"email" bson:"email" validate:"required,email"`
+	WalkThrough  bool      `json:"walk_through" bson:"walk_through"`
 	Phone        string    `json:"phone" bson:"phone" validate:"required"`
 	Password     string    `json:"password" bson:"password" validate:"required,min=8"`
 	AuthToken    string    `json:"auth_token" bson:"auth_token"`

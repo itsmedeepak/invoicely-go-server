@@ -53,6 +53,7 @@ func SignUp() gin.HandlerFunc {
 		user.CreatedAt = time.Now()
 		user.UpdatedAt = user.CreatedAt
 		user.UserId = primitive.NewObjectID().Hex()
+		user.WalkThrough = true
 
 		_, insertErr := UserCollection.InsertOne(ctx, user)
 		if insertErr != nil {
@@ -154,6 +155,7 @@ func LogIn() gin.HandlerFunc {
 			"email":         user.Email,
 			"phone":         user.Phone,
 			"auth_token":    authToken,
+			"walk_through":  user.WalkThrough,
 			"refresh_token": refreshToken,
 			"created_at":    user.CreatedAt,
 			"updated_at":    user.UpdatedAt,

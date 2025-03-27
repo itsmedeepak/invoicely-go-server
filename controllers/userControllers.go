@@ -31,9 +31,10 @@ func EditProfile() gin.HandlerFunc {
 		}
 
 		var input struct {
-			FirstName string `json:"firstName" validate:"required,min=2,max=20"`
-			LastName  string `json:"lastName" validate:"required,min=2,max=20"`
-			Phone     string `json:"phone" validate:"required"`
+			FirstName   string `json:"firstName" validate:"required,min=2,max=20"`
+			LastName    string `json:"lastName" validate:"required,min=2,max=20"`
+			WalkThrough bool   `json:"walk_through" bson:"walk_through"`
+			Phone       string `json:"phone" validate:"required"`
 		}
 
 		if err := c.BindJSON(&input); err != nil {
@@ -48,10 +49,11 @@ func EditProfile() gin.HandlerFunc {
 
 		update := bson.M{
 			"$set": bson.M{
-				"first_name": input.FirstName,
-				"last_name":  input.LastName,
-				"phone":      input.Phone,
-				"updated_at": time.Now(),
+				"first_name":   input.FirstName,
+				"last_name":    input.LastName,
+				"phone":        input.Phone,
+				"walk_through": input.WalkThrough,
+				"updated_at":   time.Now(),
 			},
 		}
 
@@ -86,13 +88,14 @@ func GetProfile() gin.HandlerFunc {
 		}
 
 		responseUser := map[string]interface{}{
-			"_id":        user.UserId,
-			"first_name": user.FirstName,
-			"last_name":  user.LastName,
-			"email":      user.Email,
-			"phone":      user.Phone,
-			"created_at": user.CreatedAt,
-			"updated_at": user.UpdatedAt,
+			"_id":          user.UserId,
+			"first_name":   user.FirstName,
+			"last_name":    user.LastName,
+			"email":        user.Email,
+			"walk_through": user.WalkThrough,
+			"phone":        user.Phone,
+			"created_at":   user.CreatedAt,
+			"updated_at":   user.UpdatedAt,
 		}
 
 		utils.ApiResponse(c, http.StatusOK, true, "Profile fetched", responseUser)
