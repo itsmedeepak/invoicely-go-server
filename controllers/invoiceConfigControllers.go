@@ -61,7 +61,7 @@ func GetInvoiceConfiguration() gin.HandlerFunc {
 		var config models.InvoiceConfiguration
 		err := InvoiceConfigCollection.FindOne(ctx, bson.M{"user_id": userID}).Decode(&config)
 		if err != nil {
-			utils.ApiResponse(c, http.StatusNotFound, false, "Invoice configuration not found", nil)
+			utils.ApiResponse(c, http.StatusOK, false, "Invoice configuration not found", nil)
 			return
 		}
 

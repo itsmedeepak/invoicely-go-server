@@ -5,40 +5,41 @@
     <title>Invoice Email</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body style="background-color: #f3f4f6; display: flex; justify-content: center; align-items: center; min-height: 100vh;">
-    <div style="max-width: 600px; width: 100%; background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+<body style="background-color: #f3f4f6;max-width: 600px; min-width:280px;">
+    <div style="line-height:5px;  margin: 0 auto; width: 100%; background-color: #ffffff; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); border-radius: 8px; padding: 8px;">
+        <div style="display: flex;">
             <div>
-                <p style="color: #374151; font-size: 14px;">{{ .Company.Address }}</p>
-                <p style="color: #374151; font-size: 14px;">{{ .Company.City }}, {{ .Company.Country }}</p>
-                <p style="color: #374151; font-size: 14px;">{{ .Company.Phone1 }}</p>
-                <p style="color: #374151; font-size: 14px;">{{ .Company.Email }}</p>
+              <h4 style="font-size: 18px; font-weight: bold; color: #111827; margin: 0;">{{ .Company.Name }}</h4>
+                <p style="color: #374151; font-size: 10px;">{{ .Company.Address }}</p>
+                <p style="color: #374151; font-size: 10px;">{{ .Company.City }}, {{ .Company.Country }}</p>
+                <p style="color: #374151; font-size: 10px;">{{ .Company.Phone1 }}</p>
+                <p style="color: #374151; font-size: 10px;">{{ .Company.Email }}</p>
             </div>
-            <div style="display: flex; align-items: center;">
-                <img src="{{ .Company.LogoURL }}" alt="Company Logo" style="width: 40px; height: 40px; margin-right: 8px;">
-                <h2 style="font-size: 18px; font-weight: bold; color: #111827; margin: 0;">{{ .Company.Name }}</h2>
+            <div style="margin-left:140px">
+                <img src="{{ .Company.LogoURL }}" alt="Company Logo" style="width: 80px; height: 80px; margin-right: 8px;">
+                
             </div>
         </div>
         
         <hr style="margin: 20px 0; border: 1px solid #d1d5db;">
         
-        <div style="margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; color: #374151;">
+        <div style="margin-bottom: 20px;  color: #374151;font-size: 10px;">
             <p><strong>Invoice #: </strong> {{ .Invoice.InvoiceID }}</p>
             <p><strong>Issued:</strong> {{ .Invoice.IssuedDate }}</p>
             <p><strong>Due:</strong> {{ .Invoice.DueDate }}</p>
         </div>
         
         <div style="margin-bottom: 20px;">
-            <h3 style="font-weight: bold; font-size: 16px; margin-bottom: 6px; color: #111827;">Bill To:</h3>
-            <p style="color: #374151; font-size: 14px;">{{ .Invoice.Customer.FirstName }} {{ .Invoice.Customer.LastName }}</p>
-            <p style="color: #374151; font-size: 14px;">{{ .Invoice.Customer.StreetAddress }}</p>
-            <p style="color: #374151; font-size: 14px;">{{ .Invoice.Customer.City }} {{ .Invoice.Customer.State }} {{ .Invoice.Customer.Country }}</p>
-            <p style="color: #374151; font-size: 14px;">{{ .Invoice.Customer.Email }}</p>
-            <p style="color: #374151; font-size: 14px;">{{ .Invoice.Customer.Phone }}</p>
+            <h3 style="font-weight: bold; font-size: 12px; margin-bottom: 6px; color: #111827;">Bill To:</h3>
+            <p style="color: #374151; font-size: 10px;">{{ .Invoice.Customer.FirstName }} {{ .Invoice.Customer.LastName }}</p>
+            <p style="color: #374151; font-size: 10px;">{{ .Invoice.Customer.StreetAddress }}</p>
+            <p style="color: #374151; font-size: 10px;">{{ .Invoice.Customer.City }} {{ .Invoice.Customer.State }} {{ .Invoice.Customer.Country }}</p>
+            <p style="color: #374151; font-size: 10px;">{{ .Invoice.Customer.Email }}</p>
+            <p style="color: #374151; font-size: 10px;">{{ .Invoice.Customer.Phone }}</p>
         </div>
         
-        <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; border: 1px solid #d1d5db; text-align: left;">
+        <div style="">
+            <table style="width:98%;border-collapse: collapse; border: 1px solid #d1d5db; text-align: left; font-size: 10px;">
                 <thead>
                     <tr style="background-color: #e5e7eb; font-weight: bold;">
                         <th style="border: 1px solid #d1d5db; padding: 8px;">Item</th>
@@ -49,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{ range .Invoice.Products }}
+                    <!--{{ range .Invoice.Products }}-->
                     <tr>
                         <td style="border: 1px solid #d1d5db; padding: 8px;">{{ .Name }}</td>
                         <td style="border: 1px solid #d1d5db; padding: 8px; text-align: right;">{{ .Currency }} {{ .Price }}</td>
@@ -57,15 +58,15 @@
                         <td style="border: 1px solid #d1d5db; padding: 8px; text-align: center;">{{ .Quantity }}</td>
                         <td style="border: 1px solid #d1d5db; padding: 8px; text-align: right;">{{ .Currency }} {{ .TotalPrice }}</td>
                     </tr>
-                    {{ end }}
+                    <!--{{ end }}-->
                 </tbody>
             </table>
         </div>
         
-        <div style="margin-top: 20px; text-align: right; color: #111827;">
+        <div style="margin-top: 40px; text-align: right; color: #111827;font-size: 12px;">
             <p><strong>Payment Method:</strong> {{ .Invoice.PaymentMethod }}</p>
             <p><strong>Payment Status:</strong> {{ .Invoice.PaymentStatus }}</p>
-            <p style="font-size: 20px; font-weight: bold; margin-top: 6px;">Total: {{ .Invoice.Currency }} {{ .Invoice.TotalAmount }}</p>
+            <p style="font-size: 14px; font-weight: bold; margin-top: 6px;">Total: {{ .Invoice.Currency }} {{ .Invoice.TotalAmount }}</p>
         </div>
     </div>
 </body>
